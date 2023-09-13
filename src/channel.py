@@ -1,6 +1,5 @@
 import json
 import os
-import isodate
 
 from googleapiclient.discovery import build
 
@@ -20,4 +19,3 @@ class Channel:
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
         print(json.dumps(self.channel, indent=2, ensure_ascii=False))
-
