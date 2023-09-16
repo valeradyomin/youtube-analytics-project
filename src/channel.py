@@ -22,6 +22,7 @@ class Channel:
 
     @property
     def channel_id(self):
+        """Геттер приватного атрибута класса"""
         return self.__channel_id
 
     @classmethod
@@ -32,6 +33,7 @@ class Channel:
 
     @classmethod
     def get_service(cls):
+        """Класс-метод возвращающий объект для работы с YouTube API."""
         return cls.youtube
 
     def print_info(self) -> None:
@@ -39,6 +41,7 @@ class Channel:
         print(json.dumps(self.channel, indent=2, ensure_ascii=False))
 
     def to_json(self, file_name):
+        """Метод сохраняющий в файл значения атрибутов экземпляра Channel."""
         channel_info = {
             "channel_id": self.__channel_id,
             "title": self.title,
