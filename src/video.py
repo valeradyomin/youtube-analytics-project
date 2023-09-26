@@ -4,6 +4,7 @@ from googleapiclient.discovery import build
 
 
 class Video:
+    """Класс для получения статистики видео по его id"""
     api_key = os.getenv('YT_API_KEY')
     youtube = build('youtube', 'v3', developerKey=api_key)
 
@@ -27,11 +28,12 @@ class Video:
         return video_response['items'][0]
 
     def __str__(self):
+        """Метод для отображения информации об объекте класса для пользователей"""
         return self.title_video
 
 
 class PLVideo(Video):
-
+    """Саб-класс для получения данных по видеоролику в плейлисте"""
     def __init__(self, id_video: str, id_playlist: str):
         self.id_video = id_video
         self.playlist_videos = Video.get_service().playlistItems().list(playlistId=id_playlist,
