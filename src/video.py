@@ -30,4 +30,18 @@ class Video:
         return self.title_video
 
 
+class PLVideo(Video):
 
+    def __init__(self, id_video: str, id_playlist: str):
+        self.id_video = id_video
+        self.playlist_videos = Video.get_service().playlistItems().list(playlistId=id_playlist,
+                                                                        part='contentDetails',
+                                                                        maxResults=250,
+                                                                        ).execute()
+
+        self.video_ids = [video['contentDetails']['videoId'] for video in self.playlist_videos['items']]
+        if self.id_video in self.video_ids:
+            super().__init__(id_video)
+            self.id_playlist = id_playlist
+        else:
+            raise ValueError("В этом плейлисте видео не найдено")
